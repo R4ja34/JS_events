@@ -2,7 +2,7 @@
 function footerClick(){
   const footer = document.querySelector("footer")
   let nbClick = 1
-  function footerClick(){
+  var footerClick = function(){
     console.log("clic n°" + nbClick)
     nbClick ++
   }
@@ -13,15 +13,13 @@ footerClick()
 // Fonctionnalité 2 :
 function clickIconButton() {
   const iconbutton = document.querySelector(".navbar-toggler");
-  function clickIconButton() {
+  var clickIconButton = function() {
     let navbarHeader = document.getElementById('navbarHeader');
     navbarHeader.classList.toggle('collapse');
   };
   iconbutton.addEventListener('click', clickIconButton)
 }
 clickIconButton()
-
-
 
 // fonctionnalité 3 :
 function firstCardEditButton(){
@@ -53,15 +51,25 @@ secondCardEditButton.addEventListener('click', clickSecondCardEditButton);
 clickSecondCardEditButton()
 
 // Fonctionnalité 5 :
-function clickBootstrapCSS(){
+function toggleBootstrapCSS() {
   const bootstrapCSS = document.querySelector('link[href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"]');
-  const navbar = document.querySelector('.navbar');
-  function clickBootstrapCSS(){
-    bootstrapCSS.setAttribute('disabled', 'true');
+  const navbar = document.querySelector('header .navbar');
+  let isEnabled = true;
+  
+  function handleClick() {
+    if (isEnabled) {
+      bootstrapCSS.setAttribute('disabled', 'true');
+    } else {
+      bootstrapCSS.removeAttribute('disabled');
+    }
+    isEnabled = !isEnabled;
   }
-  navbar.addEventListener('dblclick', clickBootstrapCSS)
+  
+  navbar.addEventListener('dblclick', handleClick);
 }
-clickBootstrapCSS()
+
+toggleBootstrapCSS();
+
 
 // Fonctionnalité 6 :
 
@@ -77,11 +85,11 @@ function viewButton() {
       if (textInCard.classList.contains('collapse')) {
         textInCard.style.display = 'none';
         imgInCard.style.transform = 'scale(0.5)';
-        imgInCard.style.transition = 'transform 0.3s ease';
+        imgInCard.style.transition = 'transform 0.5s ease';
       } else {
         textInCard.style.display = 'block';
         imgInCard.style.transform = 'scale(1)';
-        imgInCard.style.transition = 'transform 0.3s ease';
+        imgInCard.style.transition = 'transform 0.5s ease';
       }
     }
     viewButtonInCard.addEventListener('mouseover', mouseOverViewButton)
@@ -105,7 +113,7 @@ function reverseRotateButton() {
   const reverseRotateButton = document.querySelector('.btn-primary');
   reverseRotateButton.addEventListener('click', function(event) {
     event.preventDefault();
-    album.insertBefore(album.firstElementChild, album.lastElementChild);
+    album.insertBefore(album.firstElementChild, album.lastElementChild.nextSibling);
   });
 }
 reverseRotateButton()
